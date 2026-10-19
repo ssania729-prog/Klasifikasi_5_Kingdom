@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitBelajar - Katering Belajar Anak | Subscription Box Edukasi Interaktif</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Fredoka -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#8B5CF6',
+                            purpleDark: '#7C3AED',
+                            softPurple: '#F3E8FF',
+                            blue: '#3B82F6',
+                            softBlue: '#EFF6FF',
+                            yellow: '#F59E0B',
+                            softYellow: '#FEF3C7',
+                            coral: '#FF6B6B',
+                            softCoral: '#FFE5E5',
+                            mint: '#10B981',
+                            softMint: '#ECFDF5',
+                            dark: '#1E1B4B',
+                            cardBg: '#FAFAF8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hero-pattern {
+            background-color: #F8FAFC;
+            background-image: radial-gradient(#8B5CF6 0.75px, transparent 0.75px), radial-gradient(#FF6B6B 0.75px, #F8FAFC 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        .blob-bg {
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+        }
+        .floating-badge {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-brand-softPurple selection:text-brand-purple">
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-brand-purple via-brand-coral to-brand-yellow text-white font-bold text-xs sm:text-sm py-2 px-4 text-center shadow-sm flex items-center justify-center gap-2">
+        <span class="bg-white text-brand-purple px-2 py-0.5 rounded-full text-[10px] uppercase font-black tracking-wide">Promo Super Murah</span>
+        <span>🎉 Diskon Spesial Ortu Hemat! Paket Eksperimen Mulai <strong>Rp 35.000</strong>!</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-purple-100 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-coral flex items-center justify-center text-white shadow-lg shadow-purple-200 group-hover:rotate-6 transition-transform">
+                    <i class="fa-solid fa-shapes text-2xl"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-2xl text-brand-dark tracking-wide leading-none block">Kit<span class="text-brand-coral">Belajar</span></span>
+                    <span class="text-[10px] font-extrabold text-brand-purple tracking-widest uppercase">Katering Belajar Anak</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-7 font-bold text-slate-600 text-sm">
+                <a href="#masalah-solusi" class="hover:text-brand-purple transition-colors">Tantangan & Solusi</a>
+                <a href="#edisi-perdana" class="hover:text-brand-purple transition-colors">Edisi Perdana</a>
+                <a href="#pilihan-paket" class="hover:text-brand-purple transition-colors">Pilihan Paket</a>
+                <a href="#cara-kerja" class="hover:text-brand-purple transition-colors">Cara Kerja</a>
+                <a href="#faq" class="hover:text-brand-purple transition-colors">FAQ</a>
+            </div>
+
+            <!-- Cart Trigger Button -->
+            <button onclick="toggleCart()" class="relative bg-brand-purple hover:bg-brand-purpleDark text-white px-5 py-2.5 rounded-2xl transition-all flex items-center gap-2.5 shadow-md shadow-purple-200 hover:shadow-lg active:scale-95 font-bold text-sm">
+                <i class="fa-solid fa-basket-shopping text-base"></i>
+                <span class="hidden sm:inline">Keranjang</span>
+                <span id="cart-badge" class="bg-brand-coral text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden py-12 lg:py-20 hero-pattern border-b border-purple-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-softPurple border border-purple-200 text-brand-purple font-extrabold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Subscription Box Edukasi Interaktif #1
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark leading-tight">
+                        Eksperimen Seru Tanpa Gadget, <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple via-brand-coral to-brand-yellow font-display">Belajar Jadi Petualangan!</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                        Kirim paket kegiatan tangan (*hands-on*) edukatif ke rumah setiap bulan. Lengkap dengan bahan siap pakai untuk 3 proyek seru dan panduan video dari mentor ramah!
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#pilihan-paket" class="w-full sm:w-auto px-8 py-4 bg-brand-coral hover:bg-rose-600 text-white font-extrabold rounded-2xl shadow-lg shadow-rose-200 hover:shadow-rose-300 transition-all text-center text-base flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-box-open"></i> Pilih Paket Belajar (Mulai 35rb)
+                        </a>
+                        <a href="#edisi-perdana" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-brand-dark font-extrabold rounded-2xl border border-slate-200 shadow-xs transition-all text-center text-base flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play text-brand-purple"></i> Lihat Box Perdana
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200 max-w-lg mx-auto lg:mx-0 text-left">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-brand-softMint text-brand-mint flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-shield-cat"></i></div>
+                            <span class="text-xs font-bold text-slate-700 leading-snug">Bahan 100% Safe & Non-Toxic</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-brand-softBlue text-brand-blue flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-qrcode"></i></div>
+                            <span class="text-xs font-bold text-slate-700 leading-snug">Video Mentor Panduan QR</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-brand-softYellow text-brand-yellow flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-truck-fast"></i></div>
+                            <span class="text-xs font-bold text-slate-700 leading-snug">Kirim Rutin Setiap Bulan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Media Showcase -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-brand-purple/20 via-brand-coral/20 to-brand-yellow/20 rounded-full blur-2xl"></div>
+                    
+                    <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-purple-100 max-w-md w-full">
+                        <div class="relative rounded-2xl overflow-hidden group">
+                            <!-- Image: Kids happily experimenting with colorful liquids (Cheerful & Cute) -->
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80" alt="Anak-Anak Ceria Belajar Eksperimen KitBelajar" class="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-500">
+                            
+                            <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-md flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="text-xs font-extrabold text-brand-dark">Aktivitas Seru & Hemat</span>
+                            </div>
+
+                            <div class="absolute bottom-3 right-3 left-3 bg-brand-dark/90 backdrop-blur-md p-3.5 rounded-2xl text-white">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-brand-yellow text-slate-900 flex items-center justify-center text-lg font-bold">
+                                            <i class="fa-solid fa-face-smile-beam"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-xs text-white">3 Proyek Edukasi Ceria</h4>
+                                            <p class="text-[10px] text-slate-300">Bahan aman, lengkap & praktis</p>
+                                        </div>
+                                    </div>
+                                    <span class="bg-brand-coral text-white font-extrabold text-[10px] px-2.5 py-1 rounded-lg">Mulai Rp 35rb</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -left-4 bg-white p-3.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-3 floating-badge hidden sm:flex">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-purple flex items-center justify-center text-xl"><i class="fa-solid fa-face-smile"></i></div>
+                        <div>
+                            <p class="text-xs font-extrabold text-slate-800">100+ Anak Bergabung</p>
+                            <p class="text-[10px] font-bold text-emerald-600">99% Orang Tua Puas</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM & SOLUTION SECTION -->
+    <section id="masalah-solusi" class="py-16 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Solusi Cerdas Orang Tua</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">Sering Bingung Mencari Kegiatan Edukatif Tanpa Layar Gawai?</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">Membantu orang tua yang tidak memiliki banyak waktu untuk merancang eksperimen dan membeli bahan satu per satu.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Masalah Card -->
+                <div class="p-8 rounded-3xl bg-rose-50/70 border border-rose-200 relative overflow-hidden shadow-xs">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold mb-6">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-slate-800 mb-4">Masalah yang Dihadapi:</h3>
+                    <ul class="space-y-3.5 text-sm text-slate-600">
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
+                            <span>Ketergantungan tinggi anak pada gawai (screen time) yang berlebihan.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
+                            <span>Orang tua tidak punya waktu luang merancang ide aktivitas sains dan seni setiap minggu.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
+                            <span>Repot mencari bahan baku praktikum satu per satu di tempat terpisah.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solusi KitBelajar Card -->
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-brand-softPurple to-purple-50 border border-purple-200 relative overflow-hidden shadow-md">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-purple text-white flex items-center justify-center text-xl font-bold mb-6 shadow-md shadow-purple-200">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-brand-dark mb-4">Solusi Praktis KitBelajar:</h3>
+                    <ul class="space-y-3.5 text-sm text-slate-700 font-medium">
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
+                            <span><strong>Paket Fisik Bulanan:</strong> Setiap kotak berisi bahan baku siap pakai untuk 3 proyek kreatif.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
+                            <span><strong>Hasil Produk Nyata:</strong> Menghasilkan mainan atau karya sains yang bisa dipajang/dimainkan.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
+                            <span><strong>Akses Mentor Digital:</strong> Kode QR berisi video panduan dipandu Kakak Pendamping yang ramah.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED BOX / INITIAL LAUNCH THEME -->
+    <section id="edisi-perdana" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border-2 border-brand-purple/20 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-brand-coral text-white font-extrabold text-xs px-6 py-2 rounded-bl-2xl uppercase tracking-wider shadow-sm">
+                    Edisi Perdana Launching
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-4">
+                    
+                    <div class="lg:col-span-6 space-y-5">
+                        <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Spotlight Box</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Box "Detektif Sains Cilik"</h2>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Ajak buah hati meneliti rahasia reaksi kimia aman berwarna-warni dan fisika sederhana melalui 3 eksperimen lucu yang menyenangkan. Dilengkapi alat laboratorium mini safe, ramah anak & non-toxic!
+                        </p>
+
+                        <!-- 3 Included Projects -->
+                        <div class="space-y-3 pt-2">
+                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg shrink-0">🌋</div>
+                                <div>
+                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 1: Gunung Berapi Pelangi Mini</h4>
+                                    <p class="text-[11px] text-slate-500">Reaksi busa warna-warni lembut yang aman dan membuat anak takjub.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg shrink-0">🤖</div>
+                                <div>
+                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 2: VibroBot Sikat Gigi Lucu</h4>
+                                    <p class="text-[11px] text-slate-500">Robot mini bergerak sendiri dengan mata boneka yang menggemaskan.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg shrink-0">🌱</div>
+                                <div>
+                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 3: Kebun Mini Hidroponik Cilik</h4>
+                                    <p class="text-[11px] text-slate-500">Menanam benih tanaman mungil dan mengamati pertumbuhannya tiap hari.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 flex flex-wrap items-center gap-3">
+                            <button onclick="addToCart('Paket Coba-Coba (Box Perdana - 2 Proyek)', 35000)" class="px-6 py-3.5 bg-brand-coral hover:bg-rose-600 text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Coba Sekarang (Rp 35.000)
+                            </button>
+                            <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-box text-brand-purple"></i> Stok Purwarupa Terbatas: 20 Paket</span>
+                        </div>
+                    </div>
+
+                    <!-- Showcase Images: Fun, Happy Kids & Crafts -->
+                    <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="rounded-2xl overflow-hidden shadow-md h-44 sm:h-52">
+                                <!-- Image: Smiling girl playing with colorful educational crafts -->
+                                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="Anak Gembira Bermain Kerajinan Tangan" class="w-full h-full object-cover">
+                            </div>
+                            <div class="bg-brand-softPurple p-4 rounded-2xl border border-purple-200 text-center">
+                                <i class="fa-solid fa-qrcode text-3xl text-brand-purple mb-1"></i>
+                                <p class="text-[11px] font-extrabold text-brand-dark">Panduan Video QR Mentoring Ramah</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-4">
+                            <div class="bg-brand-softMint p-4 rounded-2xl border border-emerald-200 text-center">
+                                <i class="fa-solid fa-heart text-3xl text-brand-coral mb-1"></i>
+                                <p class="text-[11px] font-extrabold text-brand-dark">100% Ramah & Aman untuk Anak</p>
+                            </div>
+                            <div class="rounded-2xl overflow-hidden shadow-md h-44 sm:h-52">
+                                <!-- Image: Kids with colorful art and science project -->
+                                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80" alt="Eksperimen Warna-Warni Anak" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCT CATALOG & PRICING OPTIONS WITH CART -->
+    <section id="pilihan-paket" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Super Murah & Hemat</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">Pilihan Paket Belajar Super Terjangkau</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">Eksperimen sains & seni seru di rumah kini tidak perlu mahal! Pilih paket yang pas untuk si Kecil.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+                
+                <!-- Option 1: Paket Coba-Coba / Satuan -->
+                <div class="bg-white rounded-3xl p-6 border-2 border-slate-200 shadow-md hover:border-brand-coral transition-all flex flex-col justify-between relative">
+                    <div>
+                        <span class="bg-slate-100 text-slate-600 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Pemula / Starter</span>
+                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Paket Coba-Coba (Satuan)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Pembelian 1 box tanpa ikatan langganan.</p>
+
+                        <div class="my-5 p-3.5 bg-slate-50 rounded-2xl border border-slate-100">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-400 line-through font-bold">Rp 65.000</span>
+                                <span class="bg-rose-100 text-brand-coral font-black text-[10px] px-2 py-0.5 rounded-md">DISKON 46%</span>
+                            </div>
+                            <span class="text-3xl font-extrabold text-brand-dark">Rp 35.000</span>
+                            <span class="text-xs text-slate-500 font-semibold"> / box</span>
+                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-tag"></i> 2 Proyek Eksperimen Lengkap</span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> 1 Box Tema Perdana (Detektif Sains)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Bahan Baku Siap Pakai (2 Proyek)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Video Panduan QR Kakak Mentor</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Akses Komunitas Orang Tua Cilik</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="addToCart('Paket Coba-Coba (Single Box - 2 Proyek)', 35000)" class="w-full py-3.5 bg-brand-coral hover:bg-rose-600 text-white font-extrabold rounded-2xl transition-all shadow-md shadow-rose-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 35rb)
+                    </button>
+                </div>
+
+                <!-- Option 2: Langganan Bulanan (Monthly Subscription) -->
+                <div class="bg-gradient-to-b from-white via-purple-50/30 to-brand-softPurple/40 rounded-3xl p-6 border-2 border-brand-purple shadow-xl flex flex-col justify-between relative transform md:-translate-y-2">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-purple text-white text-[11px] font-black px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md flex items-center gap-1">
+                        <i class="fa-solid fa-star text-brand-yellow"></i> Paling Laris & Lengkap
+                    </div>
+
+                    <div>
+                        <span class="bg-purple-100 text-brand-purple font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Langganan Rutin</span>
+                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Langganan Bulanan</h3>
+                        <p class="text-xs text-slate-600 mt-1">Dikirim rutin setiap bulan ke rumah.</p>
+
+                        <div class="my-5 p-3.5 bg-white rounded-2xl border border-purple-200 shadow-inner">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-400 line-through font-bold">Rp 85.000</span>
+                                <span class="bg-purple-100 text-brand-purple font-black text-[10px] px-2 py-0.5 rounded-md">Paling Worth It</span>
+                            </div>
+                            <span class="text-3xl font-extrabold text-brand-purple">Rp 49.000</span>
+                            <span class="text-xs text-slate-500 font-semibold"> / bulan</span>
+                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Cuma Rp 16rb-an per proyek!</span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> 1 Box Tema Baru Tiap Bulan</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Lengkap Bahan 3 Proyek Kreatif</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Video Panduan Mentor QR</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> <strong>Bonus: Sertifikat Detektif Cilik</strong></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Bebas Batal Kapan Saja</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="addToCart('Langganan Bulanan (3 Proyek + Sertifikat)', 49000)" class="w-full py-3.5 bg-brand-purple hover:bg-brand-purpleDark text-white font-extrabold rounded-2xl transition-all shadow-md shadow-purple-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 49rb/Bln)
+                    </button>
+                </div>
+
+                <!-- Option 3: Paket Hemat 3 Bulan -->
+                <div class="bg-white rounded-3xl p-6 border-2 border-emerald-300 shadow-md hover:border-emerald-500 transition-all flex flex-col justify-between relative">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                        Ekstra Hemat 3 Bulan
+                    </div>
+
+                    <div>
+                        <span class="bg-emerald-100 text-emerald-800 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Paket Bundling</span>
+                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Paket Hemat 3 Bulan</h3>
+                        <p class="text-xs text-slate-500 mt-1">Bayar sekaligus untuk 3 bulan petualangan.</p>
+
+                        <div class="my-5 p-3.5 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-400 line-through font-bold">Rp 195.000</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-black text-[10px] px-2 py-0.5 rounded-md">SUPER HEMAT</span>
+                            </div>
+                            <span class="text-3xl font-extrabold text-emerald-700">Rp 129.000</span>
+                            <span class="text-xs text-slate-500 font-semibold"> / 3 box</span>
+                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-bolt"></i> Jatuhnya Cuma Rp 43.000 / Box!</span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> 3 Box Edukasi dengan Tema Berbeda</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Total 9 Proyek Eksperimen Seru</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Bonus Stiker & Sertifikat Cilik</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Gratis Ongkir Khusus Wilayah Lokal</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="addToCart('Paket Bundling 3 Bulan (3 Box)', 129000)" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl transition-all shadow-md shadow-emerald-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 129rb/3Bln)
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPLEMENTATION ROADMAP / HOW IT WORKS -->
+    <section id="cara-kerja" class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Proses Mudah</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">3 Langkah Praktis Memulai</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-purple text-white font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-purple-200">1</div>
+                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Pilih Paket Belajar</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Pilih opsi Langganan Bulanan hemat atau Paket Satuan untuk kado ulang tahun.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-coral text-white font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-rose-200">2</div>
+                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Kotak Dikirim ke Rumah</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Setiap awal bulan, kotak rapi berisi 3 proyek eksperimen fisik lengkap tiba di rumah Anda.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-slate-900 font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-amber-200">3</div>
+                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Scan QR & Berkreasi!</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Scan kode QR menggunakan ponsel untuk menonton panduan video Kakak Pendamping. Anak siap bermain!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-16 bg-white border-t border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Pertanyaan Umum</span>
+                <h2 class="text-3xl font-extrabold text-brand-dark mt-3">FAQ seputar KitBelajar</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Untuk rentang usia berapa produk ini cocok?</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">KitBelajar dirancang ideal untuk anak usia <strong>5 hingga 12 tahun</strong>. Anak usia di bawah 7 tahun disarankan tetap didampingi orang tua.</p>
+                </div>
+
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Apakah bahan-bahan di dalam kotak aman untuk anak?</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Sangat aman! Seluruh bahan baku menggunakan standar <i>non-toxic</i>, pewarna makanan, serta peralatan plastik ramah anak tanpa bahan berbahaya.</p>
+                </div>
+
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Bagaimana cara membatalkan langganan bulanan?</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Sangat mudah! Cukup hubungi Admin WhatsApp kami sebelum tanggal 25 tiap bulannya tanpa biaya denda sama sekali.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white pt-14 pb-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-slate-800">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-purple flex items-center justify-center text-white">
+                            <i class="fa-solid fa-shapes text-xl"></i>
+                        </div>
+                        <span class="font-display font-bold text-2xl text-white">Kit<span class="text-brand-coral">Belajar</span></span>
+                    </div>
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        Model subscription box edukasi interaktif berbasis bulanan yang mengirimkan paket eksperimen sains & kerajinan tangan edukatif langsung ke rumah.
+                    </p>
+                    <p class="text-xs font-bold text-brand-yellow italic">
+                        "Eksperimen Seru Tanpa Gadget, Belajar Jadi Petualangan!"
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-sm text-white mb-4">Navigasi</h5>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#masalah-solusi" class="hover:text-brand-purple transition-colors">Tantangan & Solusi</a></li>
+                        <li><a href="#edisi-perdana" class="hover:text-brand-purple transition-colors">Edisi Perdana</a></li>
+                        <li><a href="#pilihan-paket" class="hover:text-brand-purple transition-colors">Pilihan Paket</a></li>
+                        <li><a href="#cara-kerja" class="hover:text-brand-purple transition-colors">Cara Kerja</a></li>
+                        <li><a href="#faq" class="hover:text-brand-purple transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-sm text-white mb-4">Pesan via WhatsApp</h5>
+                    <p class="text-xs text-slate-400 mb-3">Layanan Customer Service & Pemesanan:</p>
+                    <a href="https://wa.me/6281335846751" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-4 py-3 rounded-xl transition-all shadow-md">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> 0813-3584-6751
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-xs text-slate-500">
+                &copy; 2026 KitBelajar (Katering Belajar Anak). Hak Cipta Dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART DRAWER MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 bg-brand-dark text-white flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-basket-shopping text-brand-coral text-xl"></i>
+                        <h3 class="font-extrabold text-lg">Keranjang Belajar</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Drawer Body -->
+                <div class="p-6 overflow-y-auto flex-1 space-y-4">
+                    <div id="cart-items" class="space-y-3">
+                        <!-- Dynamic Cart Content -->
+                    </div>
+
+                    <div id="empty-cart-msg" class="text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-box-open text-5xl mb-3 text-slate-300"></i>
+                        <p class="text-sm font-bold">Keranjang Anda masih kosong.</p>
+                        <p class="text-xs text-slate-400 mt-1">Pilih paket belajar di atas untuk menambahkan!</p>
+                    </div>
+
+                    <!-- Customer Order Form -->
+                    <div class="pt-6 border-t border-slate-200 space-y-3">
+                        <h4 class="font-extrabold text-brand-dark text-sm">Formulir Pengiriman:</h4>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Orang Tua *</label>
+                            <input type="text" id="cust-name" placeholder="Contoh: Bunda Sarah" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama & Usia Anak</label>
+                            <input type="text" id="child-info" placeholder="Contoh: Kenzie (7 tahun)" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Pengiriman Lengkap *</label>
+                            <textarea id="cust-address" rows="2" placeholder="Contoh: Jl. Mawar No. 12, RT 02/05, Jakarta" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawer Footer -->
+                <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
+                    <div class="flex justify-between items-center text-lg font-black text-brand-dark">
+                        <span>Total Pembayaran:</span>
+                        <span id="cart-total" class="text-brand-purple">Rp 0</span>
+                    </div>
+                    <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Pesan Sekarang via WhatsApp
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CART LOGIC SCRIPT -->
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            const existingIndex = cart.findIndex(item => item.name === name);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            
+            const modal = document.getElementById('cart-modal');
+            if (modal.classList.contains('hidden')) {
+                toggleCart();
+            }
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const itemsContainer = document.getElementById('cart-items');
+            const badge = document.getElementById('cart-badge');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+
+            let totalItemCount = 0;
+            let totalPrice = 0;
+
+            itemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+            } else {
+                emptyMsg.classList.add('hidden');
+            }
+
+            cart.forEach((item, index) => {
+                totalItemCount += item.qty;
+                totalPrice += item.price * item.qty;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex justify-between items-center p-3.5 bg-purple-50/70 rounded-2xl border border-purple-200/80';
+                itemEl.innerHTML = `
+                    <div>
+                        <h5 class="font-extrabold text-brand-dark text-xs">${item.name}</h5>
+                        <p class="text-xs text-brand-purple font-bold mt-0.5">Rp ${item.price.toLocaleString('id-ID')}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-white border border-slate-300 flex items-center justify-center text-xs font-bold hover:bg-slate-100">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-brand-purple text-white flex items-center justify-center text-xs font-bold hover:bg-brand-purpleDark">+</button>
+                    </div>
+                `;
+                itemsContainer.appendChild(itemEl);
+            });
+
+            badge.innerText = totalItemCount;
+            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda masih kosong!');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const childInfo = document.getElementById('child-info').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (!name || !address) {
+                alert('Mohon lengkapi Nama Orang Tua dan Alamat Pengiriman.');
+                return;
+            }
+
+            let text = `Halo *KitBelajar*, saya ingin memesan paket edukasi anak:\n\n`;
+            let totalPrice = 0;
+
+            cart.forEach((item, i) => {
+                const subtotal = item.price * item.qty;
+                totalPrice += subtotal;
+                text += `${i + 1}. *${item.name}* (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+            });
+
+            text += `\n*Total Bayar:* Rp ${totalPrice.toLocaleString('id-ID')}\n\n`;
+            text += `*Data Pemesan:*\n`;
+            text += `- Nama Orang Tua: ${name}\n`;
+            if (childInfo) text += `- Nama & Usia Anak: ${childInfo}\n`;
+            text += `- Alamat Pengiriman: ${address}\n\n`;
+            text += `Mohon info rekening dan konfirmasi pengiriman. Terima kasih!`;
+
+            const phone = "6281335846751";
+            const encodedText = encodeURIComponent(text);
+            const waUrl = `https://wa.me/${phone}?text=${encodedText}`;
+
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
