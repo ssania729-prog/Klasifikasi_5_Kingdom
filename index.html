@@ -3,736 +3,729 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KitBelajar - Katering Belajar Anak | Subscription Box Edukasi Interaktif</title>
+    <title>BIO-EXPLORER: Portal 3D & AR Klasifikasi Makhluk Hidup</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Plus Jakarta Sans & Fredoka -->
+    <!-- Google Fonts (Plus Jakarta Sans) & Font Awesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            purple: '#8B5CF6',
-                            purpleDark: '#7C3AED',
-                            softPurple: '#F3E8FF',
-                            blue: '#3B82F6',
-                            softBlue: '#EFF6FF',
-                            yellow: '#F59E0B',
-                            softYellow: '#FEF3C7',
-                            coral: '#FF6B6B',
-                            softCoral: '#FFE5E5',
-                            mint: '#10B981',
-                            softMint: '#ECFDF5',
-                            dark: '#1E1B4B',
-                            cardBg: '#FAFAF8'
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        cream: '#FFFDF7',
+                        sand: '#F5F0E6',
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
                         }
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    
     <style>
-        .hero-pattern {
-            background-color: #F8FAFC;
-            background-image: radial-gradient(#8B5CF6 0.75px, transparent 0.75px), radial-gradient(#FF6B6B 0.75px, #F8FAFC 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+        /* Custom Scrollbar untuk Filter Tab di Mobile */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .blob-bg {
-            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        .floating-badge {
-            animation: float 4s ease-in-out infinite;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-brand-softPurple selection:text-brand-purple">
+<body class="bg-cream text-slate-800 font-sans antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
 
-    <!-- ANNOUNCEMENT BAR -->
-    <div class="bg-gradient-to-r from-brand-purple via-brand-coral to-brand-yellow text-white font-bold text-xs sm:text-sm py-2 px-4 text-center shadow-sm flex items-center justify-center gap-2">
-        <span class="bg-white text-brand-purple px-2 py-0.5 rounded-full text-[10px] uppercase font-black tracking-wide">Promo Super Murah</span>
-        <span>🎉 Diskon Spesial Ortu Hemat! Paket Eksperimen Mulai <strong>Rp 35.000</strong>!</span>
-    </div>
+    <!-- 1. STICKY NAVBAR -->
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-2.5 font-extrabold text-xl text-emerald-900 tracking-tight">
+                    <span class="w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-xl flex items-center justify-center text-lg shadow-md">
+                        🧬
+                    </span>
+                    <div class="leading-none">
+                        <span>BIO-<span class="text-amber-500">EXPLORER</span></span>
+                        <span class="block text-[10px] font-bold text-slate-500 tracking-wider uppercase mt-0.5">Digital Classification Lab • Klasifikasi 5 Kingdom</span>
+                    </div>
+                </a>
 
-    <!-- NAVBAR -->
-    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-purple-100 shadow-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-coral flex items-center justify-center text-white shadow-lg shadow-purple-200 group-hover:rotate-6 transition-transform">
-                    <i class="fa-solid fa-shapes text-2xl"></i>
+                <!-- Mini Progress Pill in Navbar -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-full px-3.5 py-1.5 flex items-center gap-2 shadow-inner">
+                        <i class="fa-solid fa-vr-cardboard text-emerald-600 text-sm"></i>
+                        <span id="nav-progress-badge" class="text-xs font-extrabold text-emerald-900">0 / 14 Diamati</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="font-display font-bold text-2xl text-brand-dark tracking-wide leading-none block">Kit<span class="text-brand-coral">Belajar</span></span>
-                    <span class="text-[10px] font-extrabold text-brand-purple tracking-widest uppercase">Katering Belajar Anak</span>
-                </div>
-            </a>
-
-            <!-- Navigation Links -->
-            <div class="hidden md:flex items-center gap-7 font-bold text-slate-600 text-sm">
-                <a href="#masalah-solusi" class="hover:text-brand-purple transition-colors">Tantangan & Solusi</a>
-                <a href="#edisi-perdana" class="hover:text-brand-purple transition-colors">Edisi Perdana</a>
-                <a href="#pilihan-paket" class="hover:text-brand-purple transition-colors">Pilihan Paket</a>
-                <a href="#cara-kerja" class="hover:text-brand-purple transition-colors">Cara Kerja</a>
-                <a href="#faq" class="hover:text-brand-purple transition-colors">FAQ</a>
             </div>
-
-            <!-- Cart Trigger Button -->
-            <button onclick="toggleCart()" class="relative bg-brand-purple hover:bg-brand-purpleDark text-white px-5 py-2.5 rounded-2xl transition-all flex items-center gap-2.5 shadow-md shadow-purple-200 hover:shadow-lg active:scale-95 font-bold text-sm">
-                <i class="fa-solid fa-basket-shopping text-base"></i>
-                <span class="hidden sm:inline">Keranjang</span>
-                <span id="cart-badge" class="bg-brand-coral text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-black">0</span>
-            </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="relative overflow-hidden py-12 lg:py-20 hero-pattern border-b border-purple-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <!-- 2. HERO SECTION & PROGRESS TRACKER -->
+    <header class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute -right-16 -top-16 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute left-10 -bottom-20 w-64 h-64 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
-                <!-- Hero Left Content -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-softPurple border border-purple-200 text-brand-purple font-extrabold text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        Subscription Box Edukasi Interaktif #1
+                <!-- Left Text & Guide -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-emerald-950/60 border border-emerald-500/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-400">
+                        <i class="fa-solid fa-flask"></i>
+                        <span>IPA Kelas VII SMP • Semester 2</span>
                     </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark leading-tight">
-                        Eksperimen Seru Tanpa Gadget, <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple via-brand-coral to-brand-yellow font-display">Belajar Jadi Petualangan!</span>
-                    </h1>
-                    
-                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                        Kirim paket kegiatan tangan (*hands-on*) edukatif ke rumah setiap bulan. Lengkap dengan bahan siap pakai untuk 3 proyek seru dan panduan video dari mentor ramah!
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#pilihan-paket" class="w-full sm:w-auto px-8 py-4 bg-brand-coral hover:bg-rose-600 text-white font-extrabold rounded-2xl shadow-lg shadow-rose-200 hover:shadow-rose-300 transition-all text-center text-base flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-box-open"></i> Pilih Paket Belajar (Mulai 35rb)
-                        </a>
-                        <a href="#edisi-perdana" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-brand-dark font-extrabold rounded-2xl border border-slate-200 shadow-xs transition-all text-center text-base flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-play text-brand-purple"></i> Lihat Box Perdana
-                        </a>
-                    </div>
-
-                    <!-- Trust Badges -->
-                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200 max-w-lg mx-auto lg:mx-0 text-left">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-9 h-9 rounded-xl bg-brand-softMint text-brand-mint flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-shield-cat"></i></div>
-                            <span class="text-xs font-bold text-slate-700 leading-snug">Bahan 100% Safe & Non-Toxic</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-9 h-9 rounded-xl bg-brand-softBlue text-brand-blue flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-qrcode"></i></div>
-                            <span class="text-xs font-bold text-slate-700 leading-snug">Video Mentor Panduan QR</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-9 h-9 rounded-xl bg-brand-softYellow text-brand-yellow flex items-center justify-center text-sm shrink-0 font-bold"><i class="fa-solid fa-truck-fast"></i></div>
-                            <span class="text-xs font-bold text-slate-700 leading-snug">Kirim Rutin Setiap Bulan</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Right Media Showcase -->
-                <div class="lg:col-span-5 relative flex justify-center">
-                    <div class="absolute -inset-4 bg-gradient-to-tr from-brand-purple/20 via-brand-coral/20 to-brand-yellow/20 rounded-full blur-2xl"></div>
-                    
-                    <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-purple-100 max-w-md w-full">
-                        <div class="relative rounded-2xl overflow-hidden group">
-                            <!-- Image: Kids happily experimenting with colorful liquids (Cheerful & Cute) -->
-                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80" alt="Anak-Anak Ceria Belajar Eksperimen KitBelajar" class="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-500">
-                            
-                            <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-md flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                <span class="text-xs font-extrabold text-brand-dark">Aktivitas Seru & Hemat</span>
-                            </div>
-
-                            <div class="absolute bottom-3 right-3 left-3 bg-brand-dark/90 backdrop-blur-md p-3.5 rounded-2xl text-white">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-xl bg-brand-yellow text-slate-900 flex items-center justify-center text-lg font-bold">
-                                            <i class="fa-solid fa-face-smile-beam"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-xs text-white">3 Proyek Edukasi Ceria</h4>
-                                            <p class="text-[10px] text-slate-300">Bahan aman, lengkap & praktis</p>
-                                        </div>
-                                    </div>
-                                    <span class="bg-brand-coral text-white font-extrabold text-[10px] px-2.5 py-1 rounded-lg">Mulai Rp 35rb</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Floating Badge -->
-                    <div class="absolute -bottom-4 -left-4 bg-white p-3.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-3 floating-badge hidden sm:flex">
-                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-purple flex items-center justify-center text-xl"><i class="fa-solid fa-face-smile"></i></div>
-                        <div>
-                            <p class="text-xs font-extrabold text-slate-800">100+ Anak Bergabung</p>
-                            <p class="text-[10px] font-bold text-emerald-600">99% Orang Tua Puas</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- PROBLEM & SOLUTION SECTION -->
-    <section id="masalah-solusi" class="py-16 bg-white border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-14">
-                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Solusi Cerdas Orang Tua</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">Sering Bingung Mencari Kegiatan Edukatif Tanpa Layar Gawai?</h2>
-                <p class="text-slate-600 mt-2 text-sm sm:text-base">Membantu orang tua yang tidak memiliki banyak waktu untuk merancang eksperimen dan membeli bahan satu per satu.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Masalah Card -->
-                <div class="p-8 rounded-3xl bg-rose-50/70 border border-rose-200 relative overflow-hidden shadow-xs">
-                    <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold mb-6">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <h3 class="text-xl font-extrabold text-slate-800 mb-4">Masalah yang Dihadapi:</h3>
-                    <ul class="space-y-3.5 text-sm text-slate-600">
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
-                            <span>Ketergantungan tinggi anak pada gawai (screen time) yang berlebihan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
-                            <span>Orang tua tidak punya waktu luang merancang ide aktivitas sains dan seni setiap minggu.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-xmark text-xs font-bold"></i></div>
-                            <span>Repot mencari bahan baku praktikum satu per satu di tempat terpisah.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Solusi KitBelajar Card -->
-                <div class="p-8 rounded-3xl bg-gradient-to-br from-brand-softPurple to-purple-50 border border-purple-200 relative overflow-hidden shadow-md">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-purple text-white flex items-center justify-center text-xl font-bold mb-6 shadow-md shadow-purple-200">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <h3 class="text-xl font-extrabold text-brand-dark mb-4">Solusi Praktis KitBelajar:</h3>
-                    <ul class="space-y-3.5 text-sm text-slate-700 font-medium">
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
-                            <span><strong>Paket Fisik Bulanan:</strong> Setiap kotak berisi bahan baku siap pakai untuk 3 proyek kreatif.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
-                            <span><strong>Hasil Produk Nyata:</strong> Menghasilkan mainan atau karya sains yang bisa dipajang/dimainkan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <div class="w-5 h-5 rounded-full bg-brand-purple text-white flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs font-bold"></i></div>
-                            <span><strong>Akses Mentor Digital:</strong> Kode QR berisi video panduan dipandu Kakak Pendamping yang ramah.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURED BOX / INITIAL LAUNCH THEME -->
-    <section id="edisi-perdana" class="py-16 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="bg-white rounded-3xl p-6 sm:p-10 border-2 border-brand-purple/20 shadow-xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-brand-coral text-white font-extrabold text-xs px-6 py-2 rounded-bl-2xl uppercase tracking-wider shadow-sm">
-                    Edisi Perdana Launching
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-4">
-                    
-                    <div class="lg:col-span-6 space-y-5">
-                        <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Spotlight Box</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Box "Detektif Sains Cilik"</h2>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            Ajak buah hati meneliti rahasia reaksi kimia aman berwarna-warni dan fisika sederhana melalui 3 eksperimen lucu yang menyenangkan. Dilengkapi alat laboratorium mini safe, ramah anak & non-toxic!
+                    <div class="space-y-1.5">
+                        <h1 class="text-2xl sm:text-4xl lg:text-[40px] font-extrabold leading-tight tracking-tight">
+                            BIO-EXPLORER: <span class="text-amber-400">Digital Classification Lab</span>
+                        </h1>
+                        <p class="text-lg sm:text-2xl font-extrabold text-emerald-200 tracking-wide flex items-center gap-2">
+                            <span class="w-2 h-6 bg-amber-400 rounded-full inline-block"></span>
+                            <span>Submateri: Klasifikasi 5 Kingdom</span>
                         </p>
+                    </div>
+                    <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl">
+                        Jelajahi Keanekaragaman 5 Kingdom Secara Nyata Melalui Augmented Reality (Assemblr Edu). Amati ciri morfologi setiap takson langsung dari perangkatmu!
+                    </p>
 
-                        <!-- 3 Included Projects -->
-                        <div class="space-y-3 pt-2">
-                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg shrink-0">🌋</div>
-                                <div>
-                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 1: Gunung Berapi Pelangi Mini</h4>
-                                    <p class="text-[11px] text-slate-500">Reaksi busa warna-warni lembut yang aman dan membuat anak takjub.</p>
-                                </div>
+                    <!-- Panduan Singkat -->
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 text-xs text-emerald-50 space-y-1.5 max-w-2xl">
+                        <p class="font-extrabold text-amber-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-info"></i> Panduan Eksplorasi Lab:
+                        </p>
+                        <p class="leading-relaxed">
+                            1. Pilih kategori <strong>5 Kingdom</strong> atau cari nama takson pada kolom pencarian.<br>
+                            2. Klik <strong>"Buka AR / 3D Viewer"</strong> untuk memunculkan objek 3D di ruang nyatamu via Assemblr Edu, atau klik <strong>"Pratinjau Modal"</strong> untuk melihat langsung di layar ini.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Card: Exploration Progress Bar -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white text-slate-800 rounded-3xl p-6 shadow-xl border-2 border-amber-400/50 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600">Status Penjelajahan</span>
+                                <h2 class="text-lg font-extrabold text-emerald-950">Progres Pengamatan AR</h2>
                             </div>
-
-                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg shrink-0">🤖</div>
-                                <div>
-                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 2: VibroBot Sikat Gigi Lucu</h4>
-                                    <p class="text-[11px] text-slate-500">Robot mini bergerak sendiri dengan mata boneka yang menggemaskan.</p>
-                                </div>
-                            </div>
-
-                            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg shrink-0">🌱</div>
-                                <div>
-                                    <h4 class="font-extrabold text-xs text-brand-dark">Proyek 3: Kebun Mini Hidroponik Cilik</h4>
-                                    <p class="text-[11px] text-slate-500">Menanam benih tanaman mungil dan mengamati pertumbuhannya tiap hari.</p>
-                                </div>
+                            <div id="rank-icon" class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+                                🧭
                             </div>
                         </div>
 
-                        <div class="pt-3 flex flex-wrap items-center gap-3">
-                            <button onclick="addToCart('Paket Coba-Coba (Box Perdana - 2 Proyek)', 35000)" class="px-6 py-3.5 bg-brand-coral hover:bg-rose-600 text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2">
-                                <i class="fa-solid fa-cart-plus"></i> Coba Sekarang (Rp 35.000)
+                        <!-- Progress Bar -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-end">
+                                <span id="progress-text" class="text-sm font-extrabold text-emerald-900">0 dari 14 Spesimen AR Telah Diamati</span>
+                                <span id="progress-percentage" class="text-xs font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-lg border border-amber-200">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-3.5 p-0.5 border border-slate-200 overflow-hidden">
+                                <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 via-emerald-600 to-amber-500 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500 font-medium">Pangkat Lab: <strong id="explorer-rank" class="text-emerald-800">Junior Observer</strong></span>
+                            <button onclick="resetProgress()" class="text-slate-400 hover:text-red-600 font-bold transition-colors flex items-center gap-1" title="Atur ulang catatan pengamatan">
+                                <i class="fa-solid fa-rotate-left"></i> Reset
                             </button>
-                            <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-box text-brand-purple"></i> Stok Purwarupa Terbatas: 20 Paket</span>
                         </div>
                     </div>
-
-                    <!-- Showcase Images: Fun, Happy Kids & Crafts -->
-                    <div class="lg:col-span-6 grid grid-cols-2 gap-4">
-                        <div class="space-y-4">
-                            <div class="rounded-2xl overflow-hidden shadow-md h-44 sm:h-52">
-                                <!-- Image: Smiling girl playing with colorful educational crafts -->
-                                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="Anak Gembira Bermain Kerajinan Tangan" class="w-full h-full object-cover">
-                            </div>
-                            <div class="bg-brand-softPurple p-4 rounded-2xl border border-purple-200 text-center">
-                                <i class="fa-solid fa-qrcode text-3xl text-brand-purple mb-1"></i>
-                                <p class="text-[11px] font-extrabold text-brand-dark">Panduan Video QR Mentoring Ramah</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4 pt-4">
-                            <div class="bg-brand-softMint p-4 rounded-2xl border border-emerald-200 text-center">
-                                <i class="fa-solid fa-heart text-3xl text-brand-coral mb-1"></i>
-                                <p class="text-[11px] font-extrabold text-brand-dark">100% Ramah & Aman untuk Anak</p>
-                            </div>
-                            <div class="rounded-2xl overflow-hidden shadow-md h-44 sm:h-52">
-                                <!-- Image: Kids with colorful art and science project -->
-                                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80" alt="Eksperimen Warna-Warni Anak" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </section>
+    </header>
 
-    <!-- PRODUCT CATALOG & PRICING OPTIONS WITH CART -->
-    <section id="pilihan-paket" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Super Murah & Hemat</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">Pilihan Paket Belajar Super Terjangkau</h2>
-                <p class="text-slate-600 mt-2 text-sm sm:text-base">Eksperimen sains & seni seru di rumah kini tidak perlu mahal! Pilih paket yang pas untuk si Kecil.</p>
-            </div>
+    <!-- 3. MAIN WORKSPACE: FILTER TABS, SEARCH BAR & SPECIMEN GRID -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        <!-- Filter & Search Controls -->
+        <section class="bg-white p-4 sm:p-5 rounded-3xl border border-emerald-100 shadow-sm space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 
-                <!-- Option 1: Paket Coba-Coba / Satuan -->
-                <div class="bg-white rounded-3xl p-6 border-2 border-slate-200 shadow-md hover:border-brand-coral transition-all flex flex-col justify-between relative">
-                    <div>
-                        <span class="bg-slate-100 text-slate-600 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Pemula / Starter</span>
-                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Paket Coba-Coba (Satuan)</h3>
-                        <p class="text-xs text-slate-500 mt-1">Pembelian 1 box tanpa ikatan langganan.</p>
-
-                        <div class="my-5 p-3.5 bg-slate-50 rounded-2xl border border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-400 line-through font-bold">Rp 65.000</span>
-                                <span class="bg-rose-100 text-brand-coral font-black text-[10px] px-2 py-0.5 rounded-md">DISKON 46%</span>
-                            </div>
-                            <span class="text-3xl font-extrabold text-brand-dark">Rp 35.000</span>
-                            <span class="text-xs text-slate-500 font-semibold"> / box</span>
-                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-tag"></i> 2 Proyek Eksperimen Lengkap</span>
-                        </div>
-
-                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> 1 Box Tema Perdana (Detektif Sains)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Bahan Baku Siap Pakai (2 Proyek)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Video Panduan QR Kakak Mentor</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-coral font-black"></i> Akses Komunitas Orang Tua Cilik</li>
-                        </ul>
-                    </div>
-
-                    <button onclick="addToCart('Paket Coba-Coba (Single Box - 2 Proyek)', 35000)" class="w-full py-3.5 bg-brand-coral hover:bg-rose-600 text-white font-extrabold rounded-2xl transition-all shadow-md shadow-rose-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
-                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 35rb)
+                <!-- Kingdom Filter Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0" id="kingdom-tabs">
+                    <button onclick="setFilter('All')" data-filter="All" class="filter-btn active shrink-0 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all bg-emerald-600 text-white shadow-md">
+                        Semua Kingdom (14)
+                    </button>
+                    <button onclick="setFilter('Monera')" data-filter="Monera" class="filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100">
+                        🧫 Kingdom Monera (1)
+                    </button>
+                    <button onclick="setFilter('Protista')" data-filter="Protista" class="filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100">
+                        🔬 Kingdom Protista (2)
+                    </button>
+                    <button onclick="setFilter('Fungi')" data-filter="Fungi" class="filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100">
+                        🍄 Kingdom Fungi (1)
+                    </button>
+                    <button onclick="setFilter('Plantae')" data-filter="Plantae" class="filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100">
+                        🌿 Kingdom Plantae (4)
+                    </button>
+                    <button onclick="setFilter('Animalia')" data-filter="Animalia" class="filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100">
+                        🦁 Kingdom Animalia (6)
                     </button>
                 </div>
 
-                <!-- Option 2: Langganan Bulanan (Monthly Subscription) -->
-                <div class="bg-gradient-to-b from-white via-purple-50/30 to-brand-softPurple/40 rounded-3xl p-6 border-2 border-brand-purple shadow-xl flex flex-col justify-between relative transform md:-translate-y-2">
-                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-purple text-white text-[11px] font-black px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md flex items-center gap-1">
-                        <i class="fa-solid fa-star text-brand-yellow"></i> Paling Laris & Lengkap
-                    </div>
-
-                    <div>
-                        <span class="bg-purple-100 text-brand-purple font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Langganan Rutin</span>
-                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Langganan Bulanan</h3>
-                        <p class="text-xs text-slate-600 mt-1">Dikirim rutin setiap bulan ke rumah.</p>
-
-                        <div class="my-5 p-3.5 bg-white rounded-2xl border border-purple-200 shadow-inner">
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-400 line-through font-bold">Rp 85.000</span>
-                                <span class="bg-purple-100 text-brand-purple font-black text-[10px] px-2 py-0.5 rounded-md">Paling Worth It</span>
-                            </div>
-                            <span class="text-3xl font-extrabold text-brand-purple">Rp 49.000</span>
-                            <span class="text-xs text-slate-500 font-semibold"> / bulan</span>
-                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Cuma Rp 16rb-an per proyek!</span>
-                        </div>
-
-                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> 1 Box Tema Baru Tiap Bulan</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Lengkap Bahan 3 Proyek Kreatif</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Video Panduan Mentor QR</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> <strong>Bonus: Sertifikat Detektif Cilik</strong></li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple font-black"></i> Bebas Batal Kapan Saja</li>
-                        </ul>
-                    </div>
-
-                    <button onclick="addToCart('Langganan Bulanan (3 Proyek + Sertifikat)', 49000)" class="w-full py-3.5 bg-brand-purple hover:bg-brand-purpleDark text-white font-extrabold rounded-2xl transition-all shadow-md shadow-purple-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
-                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 49rb/Bln)
-                    </button>
-                </div>
-
-                <!-- Option 3: Paket Hemat 3 Bulan -->
-                <div class="bg-white rounded-3xl p-6 border-2 border-emerald-300 shadow-md hover:border-emerald-500 transition-all flex flex-col justify-between relative">
-                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                        Ekstra Hemat 3 Bulan
-                    </div>
-
-                    <div>
-                        <span class="bg-emerald-100 text-emerald-800 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Paket Bundling</span>
-                        <h3 class="text-xl font-extrabold text-brand-dark mt-2">Paket Hemat 3 Bulan</h3>
-                        <p class="text-xs text-slate-500 mt-1">Bayar sekaligus untuk 3 bulan petualangan.</p>
-
-                        <div class="my-5 p-3.5 bg-emerald-50/60 rounded-2xl border border-emerald-100">
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-400 line-through font-bold">Rp 195.000</span>
-                                <span class="bg-emerald-100 text-emerald-800 font-black text-[10px] px-2 py-0.5 rounded-md">SUPER HEMAT</span>
-                            </div>
-                            <span class="text-3xl font-extrabold text-emerald-700">Rp 129.000</span>
-                            <span class="text-xs text-slate-500 font-semibold"> / 3 box</span>
-                            <span class="block text-[11px] text-emerald-600 font-bold mt-1"><i class="fa-solid fa-bolt"></i> Jatuhnya Cuma Rp 43.000 / Box!</span>
-                        </div>
-
-                        <ul class="space-y-2.5 text-xs text-slate-700 mb-6 font-medium">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> 3 Box Edukasi dengan Tema Berbeda</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Total 9 Proyek Eksperimen Seru</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Bonus Stiker & Sertifikat Cilik</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 font-black"></i> Gratis Ongkir Khusus Wilayah Lokal</li>
-                        </ul>
-                    </div>
-
-                    <button onclick="addToCart('Paket Bundling 3 Bulan (3 Box)', 129000)" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl transition-all shadow-md shadow-emerald-200 active:scale-95 flex items-center justify-center gap-2 text-xs">
-                        <i class="fa-solid fa-cart-plus text-sm"></i> Tambah (Rp 129rb/3Bln)
+                <!-- Live Search Bar -->
+                <div class="relative w-full md:w-72 shrink-0">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari takson (misal: Mamalia, Paku)..." 
+                           class="w-full pl-9 pr-8 py-2.5 bg-cream border border-emerald-200 rounded-xl text-xs font-medium text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs">
+                        <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
 
             </div>
+        </section>
+
+        <!-- Active Filter Indicator & Counter -->
+        <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+            <p>Menampilkan <strong id="visible-count" class="text-emerald-900">14</strong> spesimen AR & 3D</p>
+            <p class="hidden sm:block"><i class="fa-solid fa-hand-pointer text-amber-500 mr-1"></i> Klik tombol buka AR atau pratinjau untuk menandai selesai</p>
         </div>
-    </section>
 
-    <!-- IMPLEMENTATION ROADMAP / HOW IT WORKS -->
-    <section id="cara-kerja" class="py-16 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Proses Mudah</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3">3 Langkah Praktis Memulai</h2>
-            </div>
+        <!-- SPECIMEN CARDS GRID -->
+        <section id="specimen-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Kartu Spesimen dirender secara dinamis melalui JavaScript -->
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-purple text-white font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-purple-200">1</div>
-                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Pilih Paket Belajar</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Pilih opsi Langganan Bulanan hemat atau Paket Satuan untuk kado ulang tahun.
-                    </p>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-coral text-white font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-rose-200">2</div>
-                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Kotak Dikirim ke Rumah</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Setiap awal bulan, kotak rapi berisi 3 proyek eksperimen fisik lengkap tiba di rumah Anda.
-                    </p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center relative hover:shadow-lg transition-shadow">
-                    <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-slate-900 font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-amber-200">3</div>
-                    <h3 class="font-extrabold text-brand-dark text-lg mb-2">Scan QR & Berkreasi!</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Scan kode QR menggunakan ponsel untuk menonton panduan video Kakak Pendamping. Anak siap bermain!
-                    </p>
-                </div>
-            </div>
+        <!-- Empty State (Jika pencarian tidak ditemukan) -->
+        <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-emerald-100 space-y-3">
+            <div class="text-5xl">🔍</div>
+            <h3 class="text-lg font-extrabold text-emerald-950">Spesimen Tidak Ditemukan</h3>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">Tidak ada spesimen taksonomi yang cocok dengan kata kunci pencarianmu. Coba gunakan kata kunci lain seperti "Protista", "Ikan", atau "Biji".</p>
+            <button onclick="clearSearch(); setFilter('All');" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all">
+                Tampilkan Semua Spesimen
+            </button>
         </div>
-    </section>
 
-    <!-- FAQ SECTION -->
-    <section id="faq" class="py-16 bg-white border-t border-slate-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <span class="text-brand-purple font-extrabold text-xs uppercase tracking-widest bg-brand-softPurple px-3 py-1 rounded-full border border-purple-200">Pertanyaan Umum</span>
-                <h2 class="text-3xl font-extrabold text-brand-dark mt-3">FAQ seputar KitBelajar</h2>
-            </div>
+    </main>
 
-            <div class="space-y-4">
-                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Untuk rentang usia berapa produk ini cocok?</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">KitBelajar dirancang ideal untuk anak usia <strong>5 hingga 12 tahun</strong>. Anak usia di bawah 7 tahun disarankan tetap didampingi orang tua.</p>
+    <!-- 4. MODAL PRATINJAU IFRAME (PREVIEW MODAL) -->
+    <div id="previewModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-3 sm:p-6" onclick="closePreviewModal()">
+        <div class="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl border border-emerald-200 flex flex-col max-h-[92vh]" onclick="event.stopPropagation()">
+            
+            <!-- Modal Header -->
+            <div class="bg-emerald-900 text-white px-5 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span id="modal-kingdom-badge" class="bg-amber-400 text-emerald-950 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-lg">Kingdom</span>
+                    <h3 id="modal-title" class="font-extrabold text-sm sm:text-base truncate max-w-[200px] sm:max-w-md">Nama Spesimen</h3>
                 </div>
-
-                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Apakah bahan-bahan di dalam kotak aman untuk anak?</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">Sangat aman! Seluruh bahan baku menggunakan standar <i>non-toxic</i>, pewarna makanan, serta peralatan plastik ramah anak tanpa bahan berbahaya.</p>
-                </div>
-
-                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-circle-question text-brand-purple"></i> Bagaimana cara membatalkan langganan bulanan?</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">Sangat mudah! Cukup hubungi Admin WhatsApp kami sebelum tanggal 25 tiap bulannya tanpa biaya denda sama sekali.</p>
+                <div class="flex items-center gap-2">
+                    <a id="modal-external-btn" href="#" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors">
+                        <span class="hidden sm:inline">Layar Penuh / AR</span>
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                    </a>
+                    <button onclick="closePreviewModal()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-lg transition-colors">
+                        &times;
+                    </button>
                 </div>
             </div>
+
+            <!-- Fallback Notice Banner -->
+            <div class="bg-amber-50 border-b border-amber-200 px-5 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-amber-900">
+                <p class="flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                    <span>Jika pratinjau 3D tidak muncul atau meminta izin kamera AR, silakan buka langsung di tab baru.</span>
+                </p>
+                <a id="modal-fallback-link" href="#" target="_blank" rel="noopener noreferrer" class="font-extrabold text-emerald-700 hover:text-emerald-800 underline shrink-0">
+                    Buka Tautan Assemblr Edu →
+                </a>
+            </div>
+
+            <!-- Iframe Container -->
+            <div class="relative w-full h-[60vh] sm:h-[65vh] bg-slate-100 flex items-center justify-center">
+                <div id="iframe-loader" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 space-y-2 pointer-events-none">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-emerald-600"></i>
+                    <span class="text-xs font-bold">Memuat Ruang 3D Assemblr Edu...</span>
+                </div>
+                <iframe id="ar-iframe" src="" class="w-full h-full border-0 relative z-10" allow="camera; accelerometer; gyroscope; magnetometer; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+            </div>
+
         </div>
-    </section>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-brand-dark text-white pt-14 pb-8 border-t border-slate-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-slate-800">
-                <div class="md:col-span-2 space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-brand-purple flex items-center justify-center text-white">
-                            <i class="fa-solid fa-shapes text-xl"></i>
-                        </div>
-                        <span class="font-display font-bold text-2xl text-white">Kit<span class="text-brand-coral">Belajar</span></span>
+    <!-- 5. FOOTER -->
+    <footer class="bg-emerald-950 text-white border-t border-emerald-900 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-emerald-800/80 text-center md:text-left">
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-center md:justify-start gap-2 font-extrabold text-lg">
+                        <span>🧬</span>
+                        <span>BIO-<span class="text-amber-400">EXPLORER</span>: Digital Classification Lab</span>
                     </div>
-                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
-                        Model subscription box edukasi interaktif berbasis bulanan yang mengirimkan paket eksperimen sains & kerajinan tangan edukatif langsung ke rumah.
-                    </p>
-                    <p class="text-xs font-bold text-brand-yellow italic">
-                        "Eksperimen Seru Tanpa Gadget, Belajar Jadi Petualangan!"
+                    <p class="text-xs text-emerald-200/80">
+                        Media Pembelajaran Interaktif IPA Kelas VII SMP Semester 2 — Materi Klasifikasi Makhluk Hidup.
                     </p>
                 </div>
 
-                <div>
-                    <h5 class="font-bold text-sm text-white mb-4">Navigasi</h5>
-                    <ul class="space-y-2 text-xs text-slate-400">
-                        <li><a href="#masalah-solusi" class="hover:text-brand-purple transition-colors">Tantangan & Solusi</a></li>
-                        <li><a href="#edisi-perdana" class="hover:text-brand-purple transition-colors">Edisi Perdana</a></li>
-                        <li><a href="#pilihan-paket" class="hover:text-brand-purple transition-colors">Pilihan Paket</a></li>
-                        <li><a href="#cara-kerja" class="hover:text-brand-purple transition-colors">Cara Kerja</a></li>
-                        <li><a href="#faq" class="hover:text-brand-purple transition-colors">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="font-bold text-sm text-white mb-4">Pesan via WhatsApp</h5>
-                    <p class="text-xs text-slate-400 mb-3">Layanan Customer Service & Pemesanan:</p>
-                    <a href="https://wa.me/6281335846751" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-4 py-3 rounded-xl transition-all shadow-md">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> 0813-3584-6751
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button onclick="resetProgress()" class="bg-emerald-900 hover:bg-red-900/60 border border-emerald-700 hover:border-red-500/50 text-emerald-100 text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-trash-can"></i> Reset Progres Belajar
+                    </button>
+                    <a href="#" class="bg-amber-500 hover:bg-amber-400 text-emerald-950 text-xs font-extrabold px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md">
+                        <span>Kembali ke Atas</span>
+                        <i class="fa-solid fa-arrow-up"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="pt-6 text-center text-xs text-slate-500">
-                &copy; 2026 KitBelajar (Katering Belajar Anak). Hak Cipta Dilindungi.
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/80 gap-3 text-center">
+                <p>&copy; 2026 BIO-EXPLORER Digital Lab. Seluruh hak cipta dilindungi.</p>
+                <p class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-cube text-amber-400"></i>
+                    <span>Aset 3D & Augmented Reality didukung oleh <strong>Assemblr Edu AR</strong></span>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- CART DRAWER MODAL -->
-    <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
-        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"></div>
-
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
-                
-                <!-- Drawer Header -->
-                <div class="p-6 bg-brand-dark text-white flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-basket-shopping text-brand-coral text-xl"></i>
-                        <h3 class="font-extrabold text-lg">Keranjang Belajar</h3>
-                    </div>
-                    <button onclick="toggleCart()" class="text-slate-400 hover:text-white p-2">
-                        <i class="fa-solid fa-xmark text-xl"></i>
-                    </button>
-                </div>
-
-                <!-- Drawer Body -->
-                <div class="p-6 overflow-y-auto flex-1 space-y-4">
-                    <div id="cart-items" class="space-y-3">
-                        <!-- Dynamic Cart Content -->
-                    </div>
-
-                    <div id="empty-cart-msg" class="text-center py-12 text-slate-400">
-                        <i class="fa-solid fa-box-open text-5xl mb-3 text-slate-300"></i>
-                        <p class="text-sm font-bold">Keranjang Anda masih kosong.</p>
-                        <p class="text-xs text-slate-400 mt-1">Pilih paket belajar di atas untuk menambahkan!</p>
-                    </div>
-
-                    <!-- Customer Order Form -->
-                    <div class="pt-6 border-t border-slate-200 space-y-3">
-                        <h4 class="font-extrabold text-brand-dark text-sm">Formulir Pengiriman:</h4>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Orang Tua *</label>
-                            <input type="text" id="cust-name" placeholder="Contoh: Bunda Sarah" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama & Usia Anak</label>
-                            <input type="text" id="child-info" placeholder="Contoh: Kenzie (7 tahun)" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Pengiriman Lengkap *</label>
-                            <textarea id="cust-address" rows="2" placeholder="Contoh: Jl. Mawar No. 12, RT 02/05, Jakarta" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/50"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Drawer Footer -->
-                <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
-                    <div class="flex justify-between items-center text-lg font-black text-brand-dark">
-                        <span>Total Pembayaran:</span>
-                        <span id="cart-total" class="text-brand-purple">Rp 0</span>
-                    </div>
-                    <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> Pesan Sekarang via WhatsApp
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- CART LOGIC SCRIPT -->
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        let cart = [];
+        // DATA 14 SPESIMEN AR ASSEMBLR EDU (EXACT LINKS & CATEGORIES)
+        const specimensData = [
+            {
+                id: "monera-1",
+                kingdom: "Monera",
+                subGroup: "Prokariotik Uniseluler",
+                title: "Spesimen Monera (Bakteri & Ganggang Biru)",
+                description: "Organisme bersel satu tanpa membran inti sel (prokariotik). Amati struktur sel bakteri dan cyanobacteria secara 3D.",
+                url: "https://asblr.com/SGVxgxR",
+                icon: "🧫",
+                badgeColor: "bg-blue-100 text-blue-800 border-blue-200"
+            },
+            {
+                id: "protista-1",
+                kingdom: "Protista",
+                subGroup: "Protozoa",
+                title: "Protista Mirip Hewan (Protozoa)",
+                description: "Organisme eukariotik bersel satu yang dapat bergerak aktif menggunakan silia, flagela, atau kaki semu (pseudopodia).",
+                url: "https://asblr.com/kisnri8",
+                icon: "🔬",
+                badgeColor: "bg-purple-100 text-purple-800 border-purple-200"
+            },
+            {
+                id: "protista-2",
+                kingdom: "Protista",
+                subGroup: "Alga / Ganggang",
+                title: "Protista Mirip Tumbuhan (Alga)",
+                description: "Organisme eukariotik berklorofil yang mampu berfotosintesis namun belum memiliki akar, batang, dan daun sejati.",
+                url: "https://asblr.com/dGguJWy",
+                icon: "🌊",
+                badgeColor: "bg-purple-100 text-purple-800 border-purple-200"
+            },
+            {
+                id: "fungi-1",
+                kingdom: "Fungi",
+                subGroup: "Jamur Makroskopis",
+                title: "Spesimen Fungi (Jamur)",
+                description: "Organisme eukariotik tidak berklorofil (heterotrof), dinding sel tersusun dari zat kitin, dan berkembang biak dengan spora.",
+                url: "https://asblr.com/gHxbdH7",
+                icon: "🍄",
+                badgeColor: "bg-amber-100 text-amber-800 border-amber-200"
+            },
+            {
+                id: "plantae-1",
+                kingdom: "Plantae",
+                subGroup: "Tumbuhan Berspora",
+                title: "Pteridophyta (Tumbuhan Paku)",
+                description: "Tumbuhan berpembuluh sejati (kormofita) yang berkembang biak menggunakan spora yang terletak pada sorus di balik daun.",
+                url: "https://asblr.com/gHxbdH7",
+                icon: "🌿",
+                badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-200"
+            },
+            {
+                id: "plantae-2",
+                kingdom: "Plantae",
+                subGroup: "Tumbuhan Peralihan",
+                title: "Bryophyta (Tumbuhan Lumut)",
+                description: "Tumbuhan peralihan antara talus dan kormus, tidak memiliki pembuluh angkut xilem-floem, dan hidup di tempat lembap.",
+                url: "https://asblr.com/poLiXDh",
+                icon: "🌱",
+                badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-200"
+            },
+            {
+                id: "plantae-3",
+                kingdom: "Plantae",
+                subGroup: "Tumbuhan Berbiji",
+                title: "Spermatophyta - Angiospermae (Tumbuhan Biji Tertutup)",
+                description: "Tumbuhan berbunga sejati dengan bakal biji yang terlindungi di dalam daun buah (ovarium), terbagi atas monokotil & dikotil.",
+                url: "https://asblr.com/lOkv2f",
+                icon: "🌺",
+                badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-200"
+            },
+            {
+                id: "plantae-4",
+                kingdom: "Plantae",
+                subGroup: "Tumbuhan Berbiji",
+                title: "Spermatophyta - Gimnospermae (Tumbuhan Biji Terbuka)",
+                description: "Tumbuhan dengan bakal biji tidak terlindungi daun buah dan memiliki alat reproduksi berbentuk kerucut (strobilus).",
+                url: "https://asblr.com/q5om2hE",
+                icon: "🌲",
+                badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-200"
+            },
+            {
+                id: "animalia-1",
+                kingdom: "Animalia",
+                subGroup: "Vertebrata",
+                title: "[Vertebrata] Pisces (Ikan)",
+                description: "Hewan bertulang belakang yang hidup di perairan, bernapas menggunakan insang, bersisik, dan bergerak dengan sirip.",
+                url: "https://asblr.com/oWAN",
+                icon: "🐟",
+                badgeColor: "bg-rose-100 text-rose-800 border-rose-200"
+            },
+            {
+                id: "animalia-2",
+                kingdom: "Animalia",
+                subGroup: "Vertebrata",
+                title: "[Vertebrata] Mamalia",
+                description: "Hewan bertulang belakang berdarah panas (homoioterm), tubuh ditutupi rambut, dan memiliki kelenjar susu untuk menyusui.",
+                url: "https://asblr.com/qZm9UhA",
+                icon: "🐅",
+                badgeColor: "bg-rose-100 text-rose-800 border-rose-200"
+            },
+            {
+                id: "animalia-3",
+                kingdom: "Animalia",
+                subGroup: "Vertebrata",
+                title: "[Vertebrata] Amphibia (Amfibi)",
+                description: "Hewan bertulang belakang yang hidup di dua alam (air dan darat), berkulit lembap tanpa sisik, dan mengalami metamorfosis.",
+                url: "https://asblr.com/b7UUesH",
+                icon: "🐸",
+                badgeColor: "bg-rose-100 text-rose-800 border-rose-200"
+            },
+            {
+                id: "animalia-4",
+                kingdom: "Animalia",
+                subGroup: "Invertebrata",
+                title: "[Invertebrata] Platyhelminthes (Cacing Pipih)",
+                description: "Hewan tidak bertulang belakang bertubuh pipih simetri bilateral, belum memiliki rongga tubuh sejati (aselomata).",
+                url: "https://asblr.com/kiDNuEr",
+                icon: "🪱",
+                badgeColor: "bg-orange-100 text-orange-800 border-orange-200"
+            },
+            {
+                id: "animalia-5",
+                kingdom: "Animalia",
+                subGroup: "Invertebrata",
+                title: "[Invertebrata] Cnidaria (Hewan Berongga)",
+                description: "Hewan invertebrata perairan dengan simetri radial dan memiliki sel penyengat (knidosit) pada tentakelnya seperti ubur-ubur.",
+                url: "https://asblr.com/oRHjJ44",
+                icon: "🪼",
+                badgeColor: "bg-orange-100 text-orange-800 border-orange-200"
+            },
+            {
+                id: "animalia-6",
+                kingdom: "Animalia",
+                subGroup: "Invertebrata",
+                title: "[Invertebrata] Mollusca (Hewan Lunak)",
+                description: "Hewan tidak bertulang belakang bertubuh lunak dan berlendir, sebagian besar dilindungi cangkang berbahan zat kapur.",
+                url: "https://asblr.com/nzts0dQ",
+                icon: "🐌",
+                badgeColor: "bg-orange-100 text-orange-800 border-orange-200"
+            }
+        ];
 
-        function toggleCart() {
-            const modal = document.getElementById('cart-modal');
-            modal.classList.toggle('hidden');
+        // STATE MANAGEMENT (Dilengkapi LocalStorage agar progres tersimpan)
+        const STORAGE_KEY = 'bio_explorer_observed_ids_v1';
+        let observedIds = new Set();
+        let activeKingdom = 'All';
+        let searchQuery = '';
+
+        // Load saved progress from localStorage safely
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed)) {
+                        observedIds = new Set(parsed);
+                    }
+                }
+            } catch (e) {
+                console.warn("LocalStorage tidak tersedia, menggunakan state sesi sementara.");
+            }
         }
 
-        function addToCart(name, price) {
-            const existingIndex = cart.findIndex(item => item.name === name);
-            if (existingIndex > -1) {
-                cart[existingIndex].qty += 1;
-            } else {
-                cart.push({ name, price, qty: 1 });
+        // Save progress to localStorage
+        function saveProgress() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify([...observedIds]));
+            } catch (e) {
+                // Ignore storage errors in restricted iframes
             }
-            updateCartUI();
+        }
+
+        // Mark specimen as observed & update UI
+        function markAsObserved(id) {
+            if (!observedIds.has(id)) {
+                observedIds.add(id);
+                saveProgress();
+                updateProgressUI();
+                renderCards();
+            }
+        }
+
+        // Toggle observed status manually via badge click
+        function toggleObserved(id, event) {
+            event.stopPropagation();
+            if (observedIds.has(id)) {
+                observedIds.delete(id);
+            } else {
+                observedIds.add(id);
+            }
+            saveProgress();
+            updateProgressUI();
+            renderCards();
+        }
+
+        // Reset all progress
+        function resetProgress() {
+            observedIds.clear();
+            saveProgress();
+            updateProgressUI();
+            renderCards();
+        }
+
+        // Update Progress Bar & Rank Badges
+        function updateProgressUI() {
+            const total = specimensData.length;
+            const count = observedIds.size;
+            const percentage = Math.round((count / total) * 100);
+
+            document.getElementById('progress-text').innerText = `${count} dari ${total} Spesimen AR Telah Diamati`;
+            document.getElementById('progress-percentage').innerText = `${percentage}%`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('nav-progress-badge').innerText = `${count} / ${total} Diamati`;
+
+            const rankEl = document.getElementById('explorer-rank');
+            const rankIconEl = document.getElementById('rank-icon');
+
+            if (count === total) {
+                rankEl.innerText = "Master Taxonomist 🏆";
+                rankIconEl.innerText = "🏆";
+            } else if (count >= 8) {
+                rankEl.innerText = "Senior Bio-Explorer ⭐";
+                rankIconEl.innerText = "⭐";
+            } else if (count >= 3) {
+                rankEl.innerText = "Field Researcher 🔬";
+                rankIconEl.innerText = "🔬";
+            } else {
+                rankEl.innerText = "Junior Observer 🧭";
+                rankIconEl.innerText = "🧭";
+            }
+        }
+
+        // Set Kingdom Filter
+        function setFilter(kingdom) {
+            activeKingdom = kingdom;
             
-            const modal = document.getElementById('cart-modal');
-            if (modal.classList.contains('hidden')) {
-                toggleCart();
-            }
+            // Update tab button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === kingdom) {
+                    btn.className = "filter-btn active shrink-0 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all bg-emerald-600 text-white shadow-md";
+                } else {
+                    btn.className = "filter-btn shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-cream hover:bg-emerald-50 text-slate-700 border border-emerald-100";
+                }
+            });
+
+            renderCards();
         }
 
-        function changeQty(index, delta) {
-            cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
-            updateCartUI();
-        }
+        // Handle Search Input
+        function handleSearch() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            searchQuery = input.value.trim().toLowerCase();
 
-        function updateCartUI() {
-            const itemsContainer = document.getElementById('cart-items');
-            const badge = document.getElementById('cart-badge');
-            const totalEl = document.getElementById('cart-total');
-            const emptyMsg = document.getElementById('empty-cart-msg');
-
-            let totalItemCount = 0;
-            let totalPrice = 0;
-
-            itemsContainer.innerHTML = '';
-
-            if (cart.length === 0) {
-                emptyMsg.classList.remove('hidden');
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
             } else {
-                emptyMsg.classList.add('hidden');
+                clearBtn.classList.add('hidden');
             }
 
-            cart.forEach((item, index) => {
-                totalItemCount += item.qty;
-                totalPrice += item.price * item.qty;
+            renderCards();
+        }
 
-                const itemEl = document.createElement('div');
-                itemEl.className = 'flex justify-between items-center p-3.5 bg-purple-50/70 rounded-2xl border border-purple-200/80';
-                itemEl.innerHTML = `
-                    <div>
-                        <h5 class="font-extrabold text-brand-dark text-xs">${item.name}</h5>
-                        <p class="text-xs text-brand-purple font-bold mt-0.5">Rp ${item.price.toLocaleString('id-ID')}</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-white border border-slate-300 flex items-center justify-center text-xs font-bold hover:bg-slate-100">-</button>
-                        <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-brand-purple text-white flex items-center justify-center text-xs font-bold hover:bg-brand-purpleDark">+</button>
-                    </div>
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderCards();
+        }
+
+        // Render Specimen Cards Grid
+        function renderCards() {
+            const grid = document.getElementById('specimen-grid');
+            const emptyState = document.getElementById('empty-state');
+            const visibleCountEl = document.getElementById('visible-count');
+
+            const filtered = specimensData.filter(item => {
+                const matchKingdom = activeKingdom === 'All' || item.kingdom === activeKingdom;
+                const matchSearch = item.title.toLowerCase().includes(searchQuery) ||
+                                    item.kingdom.toLowerCase().includes(searchQuery) ||
+                                    item.subGroup.toLowerCase().includes(searchQuery) ||
+                                    item.description.toLowerCase().includes(searchQuery);
+                return matchKingdom && matchSearch;
+            });
+
+            visibleCountEl.innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(item => {
+                const isObserved = observedIds.has(item.id);
+                const cardBorder = isObserved 
+                    ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-emerald-50/20' 
+                    : 'border-emerald-100 hover:border-emerald-400 bg-white';
+                
+                const statusBadge = isObserved
+                    ? `<button onclick="toggleObserved('${item.id}', event)" title="Klik untuk ubah status" class="bg-emerald-600 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1 transition-transform active:scale-95">
+                         <span>Sudah Diamati ✓</span>
+                       </button>`
+                    : `<button onclick="toggleObserved('${item.id}', event)" title="Tandai sudah diamati" class="bg-slate-100 hover:bg-emerald-100 text-slate-500 hover:text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full transition-colors">
+                         Belum Diamati
+                       </button>`;
+
+                return `
+                    <article class="rounded-3xl border-2 ${cardBorder} p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between animate-fade-in">
+                        <div>
+                            <!-- Top Row: Kingdom Tag & Observed Status -->
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-[11px] font-extrabold px-2.5 py-1 rounded-lg border ${item.badgeColor}">
+                                    Kingdom ${item.kingdom}
+                                </span>
+                                ${statusBadge}
+                            </div>
+
+                            <!-- Icon & Title -->
+                            <div class="flex items-start gap-3.5 mb-3">
+                                <div class="w-12 h-12 rounded-2xl bg-sand border border-amber-200/60 flex items-center justify-center text-2xl shrink-0 shadow-inner">
+                                    ${item.icon}
+                                </div>
+                                <div>
+                                    <span class="text-[11px] font-bold text-amber-600 uppercase tracking-wider block">${item.subGroup}</span>
+                                    <h3 class="font-extrabold text-base text-emerald-950 leading-snug mt-0.5">${item.title}</h3>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                                ${item.description}
+                            </p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="space-y-2.5 pt-4 border-t border-slate-100">
+                            <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="markAsObserved('${item.id}')"
+                               class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl text-xs shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-vr-cardboard text-sm"></i>
+                                <span>Buka AR / 3D Viewer</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
+                            </a>
+                            
+                            <button onclick="openPreviewModal('${item.id}')"
+                                    class="w-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-eye text-amber-600"></i>
+                                <span>Pratinjau Modal</span>
+                            </button>
+                        </div>
+                    </article>
                 `;
-                itemsContainer.appendChild(itemEl);
-            });
-
-            badge.innerText = totalItemCount;
-            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }).join('');
         }
 
-        function checkoutWhatsApp() {
-            if (cart.length === 0) {
-                alert('Keranjang belanja Anda masih kosong!');
-                return;
-            }
+        // Modal Iframe Preview Logic
+        function openPreviewModal(id) {
+            const item = specimensData.find(s => s.id === id);
+            if (!item) return;
 
-            const name = document.getElementById('cust-name').value.trim();
-            const childInfo = document.getElementById('child-info').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
+            // Tandai otomatis telah diamati
+            markAsObserved(id);
 
-            if (!name || !address) {
-                alert('Mohon lengkapi Nama Orang Tua dan Alamat Pengiriman.');
-                return;
-            }
+            const modal = document.getElementById('previewModal');
+            const iframe = document.getElementById('ar-iframe');
+            
+            document.getElementById('modal-kingdom-badge').innerText = `Kingdom ${item.kingdom}`;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-external-btn').href = item.url;
+            document.getElementById('modal-fallback-link').href = item.url;
+            
+            iframe.src = item.url;
 
-            let text = `Halo *KitBelajar*, saya ingin memesan paket edukasi anak:\n\n`;
-            let totalPrice = 0;
-
-            cart.forEach((item, i) => {
-                const subtotal = item.price * item.qty;
-                totalPrice += subtotal;
-                text += `${i + 1}. *${item.name}* (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
-            });
-
-            text += `\n*Total Bayar:* Rp ${totalPrice.toLocaleString('id-ID')}\n\n`;
-            text += `*Data Pemesan:*\n`;
-            text += `- Nama Orang Tua: ${name}\n`;
-            if (childInfo) text += `- Nama & Usia Anak: ${childInfo}\n`;
-            text += `- Alamat Pengiriman: ${address}\n\n`;
-            text += `Mohon info rekening dan konfirmasi pengiriman. Terima kasih!`;
-
-            const phone = "6281335846751";
-            const encodedText = encodeURIComponent(text);
-            const waUrl = `https://wa.me/${phone}?text=${encodedText}`;
-
-            window.open(waUrl, '_blank');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
         }
+
+        function closePreviewModal() {
+            const modal = document.getElementById('previewModal');
+            const iframe = document.getElementById('ar-iframe');
+            
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                iframe.src = ''; // Hentikan proses 3D saat modal ditutup agar hemat memori HP
+            }, 300);
+        }
+
+        // Tutup modal dengan tombol Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('previewModal');
+                if (!modal.classList.contains('hidden')) {
+                    closePreviewModal();
+                }
+            }
+        });
+
+        // Initialize App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            updateProgressUI();
+            renderCards();
+        });
     </script>
 </body>
 </html>
